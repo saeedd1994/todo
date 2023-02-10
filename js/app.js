@@ -5,6 +5,8 @@ it becomes global and we can use it inside function
 */
 const container = document.createElement("ol");
 document.querySelector(".items").appendChild(container);
+// declare array for rows
+let items = [];
 //prevent default
 const form = document.querySelector("form");
 form.onsubmit = (event) => {
@@ -15,6 +17,16 @@ form.onsubmit = (event) => {
     alert("value cannot be empty !...");
     return;
   }
+  // generate a key for each record
+  const Id = Math.random().toString(36).substr(2, 9);
+  //generate obj for better understand records
+  let itemObj = {
+    id: Id,
+    value: inputVal,
+  };
+  items.push(itemObj);
+  localStorage.setItem("todo-Items", JSON.stringify(items));
+  console.log(items);
   // create row for result
   const row = document.createElement("li");
   // create title inside row li
@@ -29,8 +41,7 @@ form.onsubmit = (event) => {
   container.appendChild(row);
   //remove item from dom
   deleteBtn.onclick = () => {
-    if(confirm('Are you sure delete this item ? '))
-    {
+    if (confirm("Are you sure delete this item ? ")) {
       row.remove();
     }
   };
