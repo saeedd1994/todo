@@ -1,4 +1,8 @@
 //create ol
+/*
+when I declare a var outside a function
+it becomes global and we can use it inside function
+*/
 const container = document.createElement("ol");
 document.querySelector(".items").appendChild(container);
 //prevent default
@@ -11,4 +15,23 @@ form.onsubmit = (event) => {
     alert("value cannot be empty !...");
     return;
   }
+  // create row for result
+  const row = document.createElement("li");
+  // create title inside row li
+  const title = document.createElement("h3");
+  title.innerHTML = inputVal;
+  // create delete btn inside row li
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("delete");
+  // append title and delete to ol
+  row.appendChild(title);
+  row.appendChild(deleteBtn);
+  container.appendChild(row);
+  //remove item from dom
+  deleteBtn.onclick = () => {
+    if(confirm('Are you sure delete this item ? '))
+    {
+      row.remove();
+    }
+  };
 };
